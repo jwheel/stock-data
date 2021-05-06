@@ -1,0 +1,31 @@
+1. start the program
+
+2. get a list of symbols
+
+3. set our initial state variables. 
+    1. index, set this to 0
+    2. we need a timer that fires off once a day
+    3. we need a count of how many times we ran the api today
+
+4. Fire off the daily timer. 
+    1. start a timer that executes every 15 seconds. 
+
+5. 15 second timer 
+    1. go and get a symbol
+    2. when it comes back, write the data to a file
+    3. increment symbolIndex. Increment tries counted. 
+    4. stop when it reaches 500.
+
+
+6. iterate over the collection of symbols
+    1. if the symbol needs to be updated, get history for symbol
+    2. when the history comes back, write the response to a file (mongodb). 
+
+7. we need to deal with the limitations of the api
+    1. 5 api requests per minute
+    2. 500 api requests per day
+    3. to do this, we keep track of the number of calls for that day
+        1. make calls every 15 seconds until calls exceeds 500, then quit for the day
+        2. 
+
+
