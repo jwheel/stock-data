@@ -40,11 +40,12 @@ namespace StockData.Services
         }
 
         public bool Put<T>(IEnumerable<T> items) where T : MongoEntity
-        {            
-            var collection = _db.GetCollection<T>(typeof(T).FullName);
-            //collection.UpdateMany
+        {
+            /*var collection = _db.GetCollection<T>(typeof(T).FullName);
+            collection.UpdateMany
             
-            return true;
+            return true;*/
+            throw new NotImplementedException();
         }
 
         public List<T> Get<T>() where T : MongoEntity

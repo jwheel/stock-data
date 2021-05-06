@@ -15,14 +15,13 @@ namespace StockData
 {
     public class TickerFetchService
     {
-        private readonly IConfiguration Configuration;
-        public ConfigurationItems ConfigurationItems;
         
         public delegate void TickerFetchNotifyEventHandler(object source, NotificationEventArgs args);
         public event TickerFetchNotifyEventHandler Notified;
-        private List<string> _nasdaqSymbolList { get; set; }
-        
 
+        private readonly IConfiguration Configuration;
+        private ConfigurationItems _configurationItems;
+        private List<string> _nasdaqSymbolList;        
         private System.Timers.Timer _fetchTimer;
         private Metadata _metadata;
         private MongoDbService _mongoService;
@@ -37,9 +36,9 @@ namespace StockData
         {
             var configurationItems = new ConfigurationItems();
             Configuration.GetSection("ConfigurationItems").Bind(configurationItems);
-            ConfigurationItems = configurationItems;
+            _configurationItems = configurationItems;
             _nasdaqSymbolList = GetNasdaqSymbolList().ToList();
-            _mongoService = new MongoDbService(ConfigurationItems.MongoConnectionString, "stock-options");
+            _mongoService = new MongoDbService(_configurationItems.MongoConnectionString, "stock-options");
             var metadata = _mongoService.Get<Metadata>();
             if (metadata.Count == 0)
             {
@@ -62,7 +61,7 @@ namespace StockData
 
         public void Start()
         {
-            _fetchTimer = new System.Timers.Timer(2000);
+            _fetchTimer = new System.Timers.Timer(_configurationItems.FetchInterval);
             _fetchTimer.Elapsed += FetchEvent;
             _fetchTimer.AutoReset = true;
             _fetchTimer.Enabled = true;

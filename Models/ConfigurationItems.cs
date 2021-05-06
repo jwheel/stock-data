@@ -5,5 +5,6 @@ namespace StockData.Models
     {
         public string AlphaVantageKey { get; set; }
         public string MongoConnectionString { get; set; }
+        public int FetchInterval { get; set; }
     }
 }

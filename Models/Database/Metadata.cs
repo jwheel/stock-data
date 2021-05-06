@@ -9,7 +9,7 @@ namespace StockData.Models
         
         public int StockIndex { get; set; }
         public int DailyAttempt { get; set; }
-
+        
         public Metadata()
         {
 
