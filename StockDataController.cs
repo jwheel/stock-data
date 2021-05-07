@@ -24,6 +24,7 @@ namespace StockData
             IConfigurationRoot configuration = new ConfigurationBuilder()
               .SetBasePath(Directory.GetCurrentDirectory())
               .AddJsonFile("appsettings.json")
+              .AddJsonFile("appsettings_secret.json")
               .Build();
             tickerFetchService = new TickerFetchService(configuration);
             tickerFetchService.Notified += OnTickerServiceBroadcast;            

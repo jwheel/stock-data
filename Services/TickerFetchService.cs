@@ -47,6 +47,8 @@ namespace StockData
             }
             _metadata = metadata.FirstOrDefault();
 
+            //try to import aapl as proof of concept
+
         }
 
         protected virtual void OnNotify(string value)
